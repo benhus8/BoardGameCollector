@@ -4,15 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ConfigActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <ImageView
+        android:id="@+id/basic_bckg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/helloText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/medula_one"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="15"
+        android:shadowDy="15"
+        android:shadowRadius="15"
+        android:text="Hello, {username}"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#000000"
+        android:textIsSelectable="false"
+        android:textSize="70sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Rectangle 1 -->
+    <View
+        android:id="@+id/rectangle_1"
+        android:layout_width="349dp"
+        android:layout_height="196dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rectangle_summary"
+        android:elevation="4dp"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="179dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
