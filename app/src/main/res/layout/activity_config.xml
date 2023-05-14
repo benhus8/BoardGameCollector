@@ -92,7 +92,7 @@
         android:fontFamily="@font/medula_one"
         android:gravity="center"
         android:inputType="text"
-        android:text="Your username"
+        android:text="benhus8"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/configJourneyText"
