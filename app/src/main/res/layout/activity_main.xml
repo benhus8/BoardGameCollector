@@ -4,26 +4,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfigActivity">
+    tools:context=".MainActivity">
+
+
+    <!-- Rectangle 1 -->
 
     <ImageView
         android:id="@+id/basic_bckg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="411dp"
+        android:layout_height="770dp"
         android:scaleType="fitXY"
         android:src="@drawable/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
-        android:id="@+id/helloText"
+        android:id="@+id/textGameNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="10dp"
+        android:elevation="8dp"
+        android:fontFamily="@font/medula_one"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="15"
+        android:shadowDy="15"
+        android:shadowRadius="15"
+        android:text="You have 50 games"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#000000"
+        android:textIsSelectable="false"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_1"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
+
+    <TextView
+        android:id="@+id/textExtensionNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:elevation="8dp"
+        android:fontFamily="@font/medula_one"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="15"
+        android:shadowDy="15"
+        android:shadowRadius="15"
+        android:text="You have 50 extensions"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#000000"
+        android:textIsSelectable="false"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/textLastSynchronised"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_1"
+        app:layout_constraintTop_toBottomOf="@+id/textGameNumber" />
+
+    <View
+        android:id="@+id/rectangle_1"
+        android:layout_width="349dp"
+        android:layout_height="196dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="96dp"
+        android:background="@drawable/rectangle_summary"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/basic_bckg"
+        app:layout_constraintVertical_bias="0.225" />
+
+    <TextView
+        android:id="@+id/textLastSynchronised"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:fontFamily="@font/medula_one"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="15"
+        android:shadowDy="15"
+        android:shadowRadius="15"
+        android:text="Last synchronised: 10 May 2022"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#000000"
+        android:textIsSelectable="false"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_1"
+        app:layout_constraintTop_toBottomOf="@+id/textExtensionNumber" />
+
+    <TextView
+        android:id="@+id/helloText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:elevation="8dp"
         android:fontFamily="@font/medula_one"
         android:gravity="center"
         android:shadowColor="#000000"
@@ -35,19 +117,79 @@
         android:textColorHighlight="#000000"
         android:textIsSelectable="false"
         android:textSize="70sp"
+        app:layout_constraintBottom_toTopOf="@+id/rectangle_1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <!-- Rectangle 1 -->
-    <View
-        android:id="@+id/rectangle_1"
-        android:layout_width="349dp"
-        android:layout_height="196dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/rectangle_summary"
-        android:elevation="4dp"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="179dp" />
+        app:layout_constraintTop_toTopOf="@+id/basic_bckg" />
+
+    <Button
+        android:id="@+id/buttonGames"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:backgroundTint="#FF2E2E2E"
+        android:fontFamily="@font/medula_one"
+        android:text="My Games 🎲"
+        android:textSize="30sp"
+        app:cornerRadius="150sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonExtensions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_1" />
+
+    <Button
+        android:id="@+id/buttonExtensions"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:backgroundTint="#FF2E2E2E"
+        android:fontFamily="@font/medula_one"
+        android:text="My Extensions 📜"
+        android:textSize="30sp"
+        app:cornerRadius="150sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSunchronise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGames" />
+
+    <Button
+        android:id="@+id/buttonSunchronise"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:backgroundTint="#FF2E2E2E"
+        android:fontFamily="@font/medula_one"
+        android:text="Synchronise"
+        android:textSize="30sp"
+        app:cornerRadius="150sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonClearData"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonExtensions"
+        app:strokeColor="#1AE822"
+        app:strokeWidth="1sp" />
+
+    <Button
+        android:id="@+id/buttonClearData"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#FF2E2E2E"
+        android:fontFamily="@font/medula_one"
+        android:text="Clear Data"
+        android:textSize="30sp"
+        app:cornerRadius="150sp"
+        app:layout_constraintBottom_toBottomOf="@+id/basic_bckg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSunchronise"
+        app:strokeColor="#E81A1A"
+        app:strokeWidth="1sp"
+        android:onClick="clearDataClick"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
