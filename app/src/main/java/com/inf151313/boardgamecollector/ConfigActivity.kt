@@ -18,7 +18,8 @@ class ConfigActivity : AppCompatActivity() {
         val cache = getSharedPreferences("cache", Context.MODE_PRIVATE)
 
         if(cache.getBoolean("configDone", false)) {
-            setContentView(R.layout.activity_main)
+            val i = Intent(this, MainActivity::class.java)
+            startActivity(i)
         } else {
             setContentView(R.layout.activity_config)
             inputUsername = findViewById(R.id.inputUsername)
@@ -29,7 +30,7 @@ class ConfigActivity : AppCompatActivity() {
                 val text = editText.text.toString()
                 cache.edit().putString("username", text).apply()
                 Log.d("MainActivity", text)
-                cache.edit().putBoolean("configDone", true)
+                cache.edit().putBoolean("configDone", true).apply()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
