@@ -44,7 +44,7 @@ class BoardGameDataSource(context: Context) {
         val boardGames = mutableListOf<BoardGame>()
         val cursor: Cursor = db.rawQuery("SELECT * FROM boardgame", null)
         while (cursor.moveToNext()) {
-            val id = cursor.getInt(cursor.getColumnIndex("boardgame_id"))
+            val id = cursor.getInt(cursor.getColumnIndex("id"))
             val title = cursor.getString(cursor.getColumnIndex("title"))
             val originalTitle = cursor.getString(cursor.getColumnIndex("original_title"))
             val yearPublished = cursor.getInt(cursor.getColumnIndex("year_published"))
@@ -70,7 +70,7 @@ class BoardGameDataSource(context: Context) {
         val expansions = mutableListOf<BoardGame>()
         val cursor: Cursor = db.rawQuery("SELECT * FROM expansion", null)
         while (cursor.moveToNext()) {
-            val id = cursor.getInt(cursor.getColumnIndex("expansion_id"))
+            val id = cursor.getInt(cursor.getColumnIndex("id"))
             val title = cursor.getString(cursor.getColumnIndex("title"))
             val originalTitle = cursor.getString(cursor.getColumnIndex("original_title"))
             val yearPublished = cursor.getInt(cursor.getColumnIndex("year_published"))

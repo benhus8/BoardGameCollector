@@ -147,6 +147,7 @@ class SynchroniseActivity : AppCompatActivity() {
                     ).apply()
                     lastSyncDate.text = "Last synchronised: " + cache.getString("syncDate", "")
                     cache.edit().putLong("syncDateLong", Instant.now().toEpochMilli()).apply()
+                    Toast.makeText(this, "Synchronization completed!", Toast.LENGTH_SHORT).show()
                 }
             }).start()
         } else {

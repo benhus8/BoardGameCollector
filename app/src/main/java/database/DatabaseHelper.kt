@@ -14,7 +14,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_TABLE_BOARDGAME = "CREATE TABLE IF NOT EXISTS boardgame " +
-                "(boardgame_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "title TEXT, " +
                 "original_title TEXT, " +
                 "year_published INTEGER, " +

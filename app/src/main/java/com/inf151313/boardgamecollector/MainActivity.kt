@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton("yes") { _, _ ->
                 cache.edit().putBoolean("firstSync", false).apply()
                 cache.edit().putBoolean("configDone", false).apply()
-                Toast.makeText(this, "Application will restart soon!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Application restarted!", Toast.LENGTH_SHORT).show()
                 val dataSource = BoardGameDataSource(this)
                 dataSource.deleteAllExpansions()
                 dataSource.deleteAllBoardGames()
