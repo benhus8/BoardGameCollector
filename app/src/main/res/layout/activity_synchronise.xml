@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SynchroniseActivity">
+
+
+    <!-- Rectangle 1 -->
+
+    <ImageView
+        android:id="@+id/basic_bckg"
+        android:layout_width="411dp"
+        android:layout_height="770dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textLastSynchronised1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:fontFamily="@font/medula_one"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="15"
+        android:shadowDy="15"
+        android:shadowRadius="15"
+        android:text="Last Synchronised: "
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#000000"
+        android:textIsSelectable="false"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_1"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
+
+
+    <TextView
+        android:id="@+id/textSyncProgress"
+        android:layout_width="323dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:elevation="8dp"
+        android:fontFamily="@font/medula_one"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="15"
+        android:shadowDy="15"
+        android:shadowRadius="15"
+        android:text="Synchronization Progress:"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#000000"
+        android:textIsSelectable="false"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_1" />
+
+    <View
+        android:id="@+id/rectangle_1"
+        android:layout_width="348dp"
+        android:layout_height="122dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="96dp"
+        android:background="@drawable/rectangle_summary"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/basic_bckg"
+        app:layout_constraintVertical_bias="0.212" />
+
+    <TextView
+        android:id="@+id/helloText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:elevation="8dp"
+        android:fontFamily="@font/medula_one"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="15"
+        android:shadowDy="15"
+        android:shadowRadius="15"
+        android:text="Synchronise Data"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#000000"
+        android:textIsSelectable="false"
+        android:textSize="70sp"
+        app:layout_constraintBottom_toTopOf="@+id/rectangle_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/basic_bckg"
+        app:layout_constraintVertical_bias="0.523" />
+
+    <Button
+        android:id="@+id/buttonSyncSynchronise"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="#FF2E2E2E"
+        android:fontFamily="@font/medula_one"
+        android:onClick="onSyncClick"
+        android:text="Synchronise"
+        android:textSize="30sp"
+        app:cornerRadius="150sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_1"
+        app:layout_constraintVertical_bias="0.446"
+        app:strokeColor="#1AE822"
+        app:strokeWidth="1sp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="355dp"
+        android:layout_height="27dp"
+        android:layout_marginBottom="56dp"
+        android:progressBackgroundTint="@color/white"
+        android:progressTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSyncSynchronise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSyncProgress"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textGameNumber"
+        android:id="@+id/textLastSynchronised1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -62,7 +62,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textLastSynchronised"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
         app:layout_constraintStart_toStartOf="@+id/rectangle_1"
-        app:layout_constraintTop_toBottomOf="@+id/textGameNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/textLastSynchronised1" />
 
     <View
         android:id="@+id/rectangle_1"
@@ -149,19 +149,20 @@
         android:text="My Extensions 📜"
         android:textSize="30sp"
         app:cornerRadius="150sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSunchronise"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSyncSynchronise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonGames" />
 
     <Button
-        android:id="@+id/buttonSunchronise"
+        android:id="@+id/buttonSyncSynchronise"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
         android:backgroundTint="#FF2E2E2E"
         android:fontFamily="@font/medula_one"
+        android:onClick="mainSynchroniseClick"
         android:text="Synchronise"
         android:textSize="30sp"
         app:cornerRadius="150sp"
@@ -186,7 +187,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSunchronise"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSyncSynchronise"
         app:strokeColor="#E81A1A"
         app:strokeWidth="1sp"
         android:onClick="clearDataClick"/>
