@@ -30,7 +30,7 @@ class BoardGameListActivity : AppCompatActivity(), BoardGameAdapter.OnItemClickL
     }
     override fun onItemClick(boardGameId: Int) {
         // Otwórz nowe Activity z przekazanym ID obiektu
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, BoardGameDetailsActivity::class.java)
         intent.putExtra("boardGameId", boardGameId)
         startActivity(intent)
     }

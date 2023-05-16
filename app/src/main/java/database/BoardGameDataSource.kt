@@ -95,6 +95,19 @@ class BoardGameDataSource(context: Context) {
         return thumbnail
     }
     @SuppressLint("Range")
+    fun getBoardGameByGameId(gameId: Int): Int? {
+        val query = "SELECT bgg_id FROM boardgame WHERE id = ?"
+        val selectionArgs = arrayOf(gameId.toString())
+        val cursor = db.rawQuery(query, selectionArgs)
+
+        var boardGameBggId: Int? = null
+        if (cursor.moveToFirst()) {
+            boardGameBggId = cursor.getInt(cursor.getColumnIndex("bgg_id"))
+        }
+        cursor.close()
+        return boardGameBggId
+    }
+    @SuppressLint("Range")
     fun getThumbnailByExpansionId(gameId: Int): String? {
         val query = "SELECT thumbnail FROM image WHERE expansion_id = ?"
         val selectionArgs = arrayOf(gameId.toString())
