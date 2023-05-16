@@ -10,7 +10,7 @@ import database.BoardGameDataSource
 import enums.Type
 
 
-class BoardGameListActivity : AppCompatActivity() {
+class BoardGameListActivity : AppCompatActivity(), BoardGameAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var boardGameAdapter: BoardGameAdapter
 
@@ -25,7 +25,14 @@ class BoardGameListActivity : AppCompatActivity() {
         val boardGames = dataSource.getAllBoardGames()
 
         boardGameAdapter = BoardGameAdapter(this, boardGames, Type.BOARDGAME)
+        boardGameAdapter.setOnItemClickListener(this)
         recyclerView.adapter = boardGameAdapter
+    }
+    override fun onItemClick(boardGameId: Int) {
+        // Otwórz nowe Activity z przekazanym ID obiektu
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("boardGameId", boardGameId)
+        startActivity(intent)
     }
     override fun onBackPressed() {
         val intent = Intent(this, MainActivity::class.java)

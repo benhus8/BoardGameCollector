@@ -1,16 +1,13 @@
 package adapter
 
 import android.content.Context
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.inf151313.boardgamecollector.BoardGameListActivity
 import com.inf151313.boardgamecollector.R
 import com.squareup.picasso.Picasso
 import database.BoardGameDataSource
@@ -22,11 +19,21 @@ class BoardGameAdapter(private val context: Context, private val boardGames: Lis
 
     private val VIEW_TYPE_HEADER = 0
     private val VIEW_TYPE_ITEM = 1
-
+    private var onItemClickListener: OnItemClickListener? = null
+    interface OnItemClickListener {
+        fun onItemClick(boardGameId: Int)
+    }
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.onItemClickListener = listener
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(context)
         return if (viewType == VIEW_TYPE_HEADER) {
-            val headerView = inflater.inflate(R.layout.header_board_games, parent, false)
+            val headerView:View = if(type.equals(Type.BOARDGAME)) {
+                inflater.inflate(R.layout.header_board_games, parent, false)
+            } else {
+                inflater.inflate(R.layout.header_expansions, parent, false)
+            }
             HeaderViewHolder(headerView)
         } else {
             val itemView = inflater.inflate(R.layout.item_board_game, parent, false)
@@ -85,6 +92,11 @@ class BoardGameAdapter(private val context: Context, private val boardGames: Lis
                 thumbnailUrl = dataSource.getThumbnailByExpansionId(boardGame.id).toString()
             }
             Picasso.get().load(thumbnailUrl).into(imageThumbnail)
+
+            itemView.setOnClickListener {
+                val boardGameId = boardGame.id
+                onItemClickListener?.onItemClick(boardGameId)
+            }
         }
     }
 }
