@@ -35,7 +35,7 @@ class BoardGameDataSource(context: Context) {
         values.put("game_id", image.gameId)
         values.put("expansion_id", image.expansionId)
         values.put("image_path", image.imagePath)
-        values.put("thumbnail", image.imagePath)
+        values.put("thumbnail", image.thumbnail)
         db.insert("image", null, values)
     }
 
@@ -80,6 +80,19 @@ class BoardGameDataSource(context: Context) {
         }
         cursor.close()
         return expansions
+    }
+    @SuppressLint("Range")
+    fun getThumbnailByGameId(gameId: Int): String? {
+        val query = "SELECT thumbnail FROM image WHERE game_id = ?"
+        val selectionArgs = arrayOf(gameId.toString())
+        val cursor = db.rawQuery(query, selectionArgs)
+
+        var thumbnail: String? = null
+        if (cursor.moveToFirst()) {
+            thumbnail = cursor.getString(cursor.getColumnIndex("thumbnail"))
+        }
+        cursor.close()
+        return thumbnail
     }
 
 }

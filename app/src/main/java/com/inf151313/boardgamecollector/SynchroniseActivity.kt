@@ -124,11 +124,11 @@ class SynchroniseActivity : AppCompatActivity() {
                             originalTitle = boardGame.title,
                             yearPublished = boardGame.yearPublished,
                             bggId = boardGame.bggId))
-
+                    Log.d("adding to database", boardGame.thumbnail)
                     dataSource.addImage(
                         Image(
-                            expansionId = newBoardGameId.toInt(),
-                            gameId = null,
+                            expansionId = null,
+                            gameId = newBoardGameId.toInt(),
                             imagePath = boardGame.image,
                             thumbnail = boardGame.thumbnail))
                 }

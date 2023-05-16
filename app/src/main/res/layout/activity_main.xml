@@ -130,6 +130,7 @@
         android:layout_marginBottom="6dp"
         android:backgroundTint="#FF2E2E2E"
         android:fontFamily="@font/medula_one"
+        android:onClick="mainMyGamesClick"
         android:text="My Games 🎲"
         android:textSize="30sp"
         app:cornerRadius="150sp"

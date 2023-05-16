@@ -33,7 +33,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "game_id INTEGER, " +
                 "expansion_id INTEGER, " +
-                "year_published INTEGER, " +
+                "thumbnail TEXT," +
+                "image_path TEXT, " +
                 "FOREIGN KEY (game_id) REFERENCES boardgame(id) ON DELETE CASCADE, " +
                 "FOREIGN KEY (expansion_id) REFERENCES expansion(id) ON DELETE CASCADE) "
         db?.execSQL(CREATE_TABLE_IMAGE)

@@ -2,9 +2,11 @@ package com.inf151313.boardgamecollector
 
 
 import XmlParserTask
+import adapter.BoardGameAdapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -85,11 +87,11 @@ class MainActivity : AppCompatActivity() {
                         yearPublished = boardGame.yearPublished,
                         bggId = boardGame.bggId)
                 )
-
+                Log.d("adding to database", boardGame.thumbnail)
                 dataSource.addImage(
                     Image(
-                        expansionId = newBoardGameId.toInt(),
-                        gameId = null,
+                        expansionId = null,
+                        gameId = newBoardGameId.toInt(),
                         imagePath = boardGame.image,
                         thumbnail = boardGame.thumbnail)
                 )
@@ -101,20 +103,15 @@ class MainActivity : AppCompatActivity() {
             cache.edit().putLong("syncDateLong", Instant.now().toEpochMilli()).apply()
 
         } else {
-            val dataSource = BoardGameDataSource(this)
+            performRoutineSetup(cache)
 
-            val helloTextView = findViewById<TextView>(R.id.helloText2)
-            helloTextView.text = "Hello, " + cache.getString("username", "")
-
-            val expansionNumber: TextView = findViewById(R.id.textExtensionNumber)
-            expansionNumber.text = "You have " + dataSource.getAllExpansions().size + " expansions!"
-
-            val gamesNumber: TextView = findViewById(R.id.textLastSynchronised1)
-            gamesNumber.text = "You have " + dataSource.getAllBoardGames().size + " games!"
-
-            val lastSyncDate: TextView = findViewById(R.id.textLastSynchronised)
-            lastSyncDate.text = "Last synchronised: " + cache.getString("syncDate", "")
-
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+        val cache = getSharedPreferences("cache", Context.MODE_PRIVATE)
+        if (cache.getBoolean("firstSync", false)) {
+            performRoutineSetup(cache)
         }
     }
     fun clearDataClick (v: View) {
@@ -122,6 +119,13 @@ class MainActivity : AppCompatActivity() {
     }
     fun mainSynchroniseClick (v: View) {
         moveToSynchroniseData()
+    }
+    fun mainMyGamesClick (v: View) {
+        moveToGameList()
+    }
+    private fun moveToGameList () {
+        val intent = Intent(this, BoardGameListActivity::class.java)
+        startActivity(intent)
     }
     private fun moveToSynchroniseData () {
         val intent = Intent(this, SynchroniseActivity::class.java)
@@ -148,6 +152,23 @@ class MainActivity : AppCompatActivity() {
             }
         val alert = builder.create()
         alert.show()
+    }
+
+    private fun performRoutineSetup(cache: SharedPreferences) {
+
+        val dataSource = BoardGameDataSource(this)
+
+        val helloTextView = findViewById<TextView>(R.id.helloText2)
+        helloTextView.text = "Hello, " + cache.getString("username", "")
+
+        val expansionNumber: TextView = findViewById(R.id.textExtensionNumber)
+        expansionNumber.text = "You have " + dataSource.getAllExpansions().size + " expansions!"
+
+        val gamesNumber: TextView = findViewById(R.id.textLastSynchronised1)
+        gamesNumber.text = "You have " + dataSource.getAllBoardGames().size + " games!"
+
+        val lastSyncDate: TextView = findViewById(R.id.textLastSynchronised)
+        lastSyncDate.text = "Last synchronised: " + cache.getString("syncDate", "")
     }
 
 }
