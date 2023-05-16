@@ -23,7 +23,7 @@
         android:id="@+id/configJourneyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="7dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="71dp"
         android:fontFamily="@font/medula_one"
         android:gravity="center"
@@ -38,12 +38,14 @@
         android:textSize="50sp"
         app:layout_constraintBottom_toTopOf="@+id/acceptUsername"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputUsername" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputUsername"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/configUsernameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="360dp"
+        android:layout_height="99dp"
         android:layout_marginBottom="42dp"
         android:fontFamily="@font/medula_one"
         android:gravity="center"
@@ -57,14 +59,14 @@
         android:textIsSelectable="false"
         android:textSize="50sp"
         app:layout_constraintBottom_toTopOf="@+id/inputUsername"
-        app:layout_constraintStart_toStartOf="@+id/basic_bckg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
 
     <TextView
         android:id="@+id/mainTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="75dp"
         android:layout_marginBottom="80dp"
         android:fontFamily="@font/medula_one"
@@ -79,14 +81,14 @@
         android:textIsSelectable="false"
         android:textSize="70sp"
         app:layout_constraintBottom_toTopOf="@+id/configUsernameText"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/inputUsername"
-        android:layout_width="236dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="15dp"
+        android:layout_width="241dp"
+        android:layout_height="45dp"
         android:background="@drawable/rectangle_shape"
         android:ems="10"
         android:fontFamily="@font/medula_one"
@@ -97,6 +99,7 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/configJourneyText"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/configUsernameText" />
 
@@ -105,15 +108,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="137dp"
+        android:backgroundTint="#FF2E2E2E"
         android:fontFamily="@font/medula_one"
         android:text="Save"
-        android:backgroundTint="#FF2E2E2E"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#03A9F4"
+        android:textColorLink="#FDFDFD"
         android:textSize="30sp"
         app:cornerRadius="150sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/configJourneyText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

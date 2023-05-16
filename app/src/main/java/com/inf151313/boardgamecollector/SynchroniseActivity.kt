@@ -58,7 +58,10 @@ class SynchroniseActivity : AppCompatActivity() {
                     ""
                 ) +
                         "&subtype=boardgame&excludesubtype=boardgameexpansion"
-                val boardgames = XmlParserTask().execute(url)
+                var boardgames = XmlParserTask().execute(url)
+                if(boardgames.get().isEmpty()) {
+                    boardgames = XmlParserTask().execute(url)
+                }
                 runOnUiThread {
                     val number = Random.nextInt(0, 28)
                     progressBar.setProgress(number, true)
@@ -71,7 +74,10 @@ class SynchroniseActivity : AppCompatActivity() {
                     ""
                 ) +
                         "&subtype=boardgameexpansion"
-                val expansions = XmlParserTask().execute(url)
+                var expansions = XmlParserTask().execute(url)
+                if(expansions.get().isEmpty()) {
+                    expansions = XmlParserTask().execute(url)
+                }
                 runOnUiThread {
                     val number = Random.nextInt(30, 47)
                     progressBar.setProgress(number, true)

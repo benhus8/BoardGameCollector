@@ -14,9 +14,10 @@ import com.bumptech.glide.Glide
 import com.inf151313.boardgamecollector.R
 import com.squareup.picasso.Picasso
 import database.BoardGameDataSource
+import enums.Type
 import model.BoardGame
 
-class BoardGameAdapter(private val context: Context, private val boardGames: List<BoardGame>) :
+class BoardGameAdapter(private val context: Context, private val boardGames: List<BoardGame>, private val type: Type) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_HEADER = 0
@@ -77,8 +78,12 @@ class BoardGameAdapter(private val context: Context, private val boardGames: Lis
 
             // Zaciąganie miniaturki na podstawie linku
             val dataSource = BoardGameDataSource(context)
-            val  thumbnailUrl = dataSource.getThumbnailByGameId(boardGame.id)
-            Log.d("asdasd123123", thumbnailUrl.toString())
+            var thumbnailUrl: String = ""
+            if(type.equals(Type.BOARDGAME)) {
+                thumbnailUrl = dataSource.getThumbnailByGameId(boardGame.id).toString()
+            } else {
+                thumbnailUrl = dataSource.getThumbnailByExpansionId(boardGame.id).toString()
+            }
             Picasso.get().load(thumbnailUrl).into(imageThumbnail)
         }
     }
