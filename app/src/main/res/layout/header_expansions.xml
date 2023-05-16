@@ -2,7 +2,7 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Board Games"
+    android:text="Expansions"
     android:textSize="30sp"
     android:textStyle="bold"
     android:padding="8dp"
