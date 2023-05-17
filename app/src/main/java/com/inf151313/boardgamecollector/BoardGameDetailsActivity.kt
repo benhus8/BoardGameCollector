@@ -19,10 +19,11 @@ import kotlinx.coroutines.withContext
 import model.BoardGameDetailsParser
 import java.io.IOException
 import java.net.URL
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.CAMERA
 import android.Manifest.permission.READ_MEDIA_IMAGES
+import android.app.Dialog
 import android.util.Log
+import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
@@ -30,7 +31,7 @@ import model.ImageFile
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-
+import android.text.Html
 
 
 class BoardGameDetailsActivity : AppCompatActivity() {
@@ -52,8 +53,12 @@ class BoardGameDetailsActivity : AppCompatActivity() {
         val dataSource = BoardGameDataSource(this)
         val boardGameBggId = dataSource.getBoardGameByGameId(boardGameId)
 
-        val detailsTitle = findViewById<TextView>(R.id.textDetailsTitle)
-        detailsTitle.text = "Game Bgg id:" + boardGameBggId.toString()
+        val boardGameTitleDetails = findViewById<TextView>(R.id.textBoardGameDetails)
+        val rank = findViewById<TextView>(R.id.textRank)
+        val yearProduced = findViewById<TextView>(R.id.textYearProduced)
+        val playerNumber = findViewById<TextView>(R.id.textPlayersNumber)
+        val playTime = findViewById<TextView>(R.id.textPLayingTime)
+        val textDescription = findViewById<TextView>(R.id.textDescription)
 
 
         val xmlParser = BoardGameDetailsParser(boardGameBggId.toString())
@@ -63,7 +68,13 @@ class BoardGameDetailsActivity : AppCompatActivity() {
                 ///tutaj załadowujemy zdjęcia ze stronki
                 loadImage(gameDetails.image)
                 loadImageFilesFromDatabase(boardGameId)
-                detailsTitle.text = "Game Bgg id:" + gameDetails.rank
+                boardGameTitleDetails.text = gameDetails.name
+                rank.text = "Global Rank position: " + gameDetails.rank
+                yearProduced.text = "Year Published: " + gameDetails.yearPublished
+                playerNumber.text = "PLayers: " + gameDetails.minPlayers + " - " + gameDetails.maxPlayers
+                playTime.text = "Average playing time: " + gameDetails.playingTime
+                textDescription.text = "Description: " + decodeHtmlText(gameDetails.description)
+
                 initUI()
             }
         }
@@ -74,7 +85,7 @@ class BoardGameDetailsActivity : AppCompatActivity() {
         val buttonNext = findViewById<Button>(R.id.buttonNext)
         val buttonAdd = findViewById<Button>(R.id.buttonAdd)
         val buttonRemove = findViewById<Button>(R.id.buttonRemove)
-
+        val imageView = findViewById<ImageView>(R.id.imageView)
 
         buttonPrev.setOnClickListener {
             showPreviousImage()
@@ -90,6 +101,26 @@ class BoardGameDetailsActivity : AppCompatActivity() {
         buttonRemove.setOnClickListener {
             removeCurrentImage()
         }
+
+        imageView.setOnClickListener {
+            showImagePreviewDialog()
+        }
+    }
+    fun decodeHtmlText(htmlText: String): String {
+        val decodedText = Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY)
+        return decodedText.toString()
+    }
+    private fun showImagePreviewDialog() {
+        val currentBitmap = images[currentImageIndex]
+
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_image_preview)
+
+        val imageViewPreview = dialog.findViewById<ImageView>(R.id.imagePreview)
+        imageViewPreview.setImageBitmap(currentBitmap)
+        dialog.show()
     }
     private fun saveImage(bitmap: Bitmap, resourceId: Int) {
         val dataSource = BoardGameDataSource(this)
