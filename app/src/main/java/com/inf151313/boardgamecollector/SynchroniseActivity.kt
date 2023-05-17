@@ -89,6 +89,7 @@ class SynchroniseActivity : AppCompatActivity() {
                 dataSource.deleteAllBoardGames()
                 dataSource.deleteAllExpansions()
                 dataSource.deleteAllImages()
+                dataSource.deleteAllImageFiles()
                 runOnUiThread {
                     val number = Random.nextInt(50, 60)
                     progressBar.setProgress(number, true)

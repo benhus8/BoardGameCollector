@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import model.BoardGame
 import model.Image
+import model.ImageFile
 
 
 class BoardGameDataSource(context: Context) {
@@ -38,6 +39,14 @@ class BoardGameDataSource(context: Context) {
         values.put("thumbnail", image.thumbnail)
         db.insert("image", null, values)
     }
+    fun addImageFile(image: ImageFile) {
+        val values = ContentValues()
+        values.put("game_id", image.gameId)
+        values.put("expansion_id", image.expansionId)
+        values.put("image_path", image.imagePath)
+        db.insert("image_file", null, values)
+    }
+
 
     @SuppressLint("Range")
     fun getAllBoardGames(): List<BoardGame> {
@@ -63,6 +72,13 @@ class BoardGameDataSource(context: Context) {
     }
     fun deleteAllImages() {
         db.delete("image", null, null)
+    }
+    fun deleteAllImageFiles() {
+        db.delete("image_file", null, null)
+    }
+    fun deleteImageFileByImagePath(imagePath: String) {
+        db.delete("image_file", "image_path = ?", arrayOf(imagePath.toString()))
+        db.close()
     }
 
     @SuppressLint("Range")
@@ -93,6 +109,20 @@ class BoardGameDataSource(context: Context) {
         }
         cursor.close()
         return thumbnail
+    }
+    @SuppressLint("Range")
+    fun getImageFilesByGameId(gameId: Int): List<String> {
+        val imageFiles = mutableListOf<String>()
+
+        val query = "SELECT image_path FROM image_file WHERE game_id = ?"
+        val cursor = db.rawQuery(query, arrayOf(gameId.toString()))
+
+        while (cursor.moveToNext()) {
+            val imagePath = cursor.getString(cursor.getColumnIndexOrThrow("image_path"))
+            imageFiles.add(imagePath)
+        }
+        cursor.close()
+        return imageFiles
     }
     @SuppressLint("Range")
     fun getBoardGameByGameId(gameId: Int): Int? {

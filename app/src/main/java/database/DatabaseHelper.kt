@@ -38,6 +38,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 "FOREIGN KEY (game_id) REFERENCES boardgame(id) ON DELETE CASCADE, " +
                 "FOREIGN KEY (expansion_id) REFERENCES expansion(id) ON DELETE CASCADE) "
         db?.execSQL(CREATE_TABLE_IMAGE)
+
+    val CREATE_TABLE_IMAGE_FILE = "CREATE TABLE IF NOT EXISTS image_file " +
+            "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "game_id INTEGER, " +
+            "expansion_id INTEGER, " +
+            "image_path TEXT, " +
+            "FOREIGN KEY (game_id) REFERENCES boardgame(id) ON DELETE CASCADE, " +
+            "FOREIGN KEY (expansion_id) REFERENCES expansion(id) ON DELETE CASCADE) "
+    db?.execSQL(CREATE_TABLE_IMAGE_FILE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

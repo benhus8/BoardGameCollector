@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                 dataSource.deleteAllExpansions()
                 dataSource.deleteAllBoardGames()
                 dataSource.deleteAllImages()
+                dataSource.deleteAllImageFiles()
                 val intent = Intent(this, ConfigActivity::class.java)
                 startActivity(intent)
             }

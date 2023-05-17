@@ -42,6 +42,7 @@ class ConfigActivity : AppCompatActivity() {
                 dataSource.deleteAllBoardGames()
                 dataSource.deleteAllExpansions()
                 dataSource.deleteAllImages()
+                dataSource.deleteAllImageFiles()
                 var url = "https://boardgamegeek.com/xmlapi2/collection?username=" + cache.getString(
                     "username",
                     ""
