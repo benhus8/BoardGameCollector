@@ -22,17 +22,22 @@ import java.net.URL
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.CAMERA
 import android.Manifest.permission.READ_MEDIA_IMAGES
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import model.ImageFile
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 
 
+
 class BoardGameDetailsActivity : AppCompatActivity() {
     private val images = mutableListOf<Bitmap>()
     private var currentImageIndex = 0
+
+    private var DEFAULT_IMAGE_BITMAP: Bitmap? = null
 
     private val CAMERA_PERMISSION_REQUEST_CODE = 1001
     private val GALLERY_PERMISSION_REQUEST_CODE = 1002
@@ -115,12 +120,17 @@ class BoardGameDetailsActivity : AppCompatActivity() {
             try {
                 val inputStream = URL(imageUrl).openStream()
                 val bitmap = BitmapFactory.decodeStream(inputStream)
-                runOnUiThread {
-                    val imageView = findViewById<ImageView>(R.id.imageView)
-                    imageView.setImageBitmap(bitmap)
-                }
+                DEFAULT_IMAGE_BITMAP = bitmap
+//                runOnUiThread {
+//                    val imageView = findViewById<ImageView>(R.id.imageView)
+//                    imageView.setImageBitmap(bitmap)
+//                }
                 withContext(Dispatchers.Main) {
                     images.add(bitmap)
+                    runOnUiThread {
+                        val imageView = findViewById<ImageView>(R.id.imageView)
+                      imageView.setImageBitmap(images[currentImageIndex])
+                    }
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -149,20 +159,32 @@ class BoardGameDetailsActivity : AppCompatActivity() {
         if (images.size > 1) {
             val gameId = intent.getIntExtra("boardGameId", 0)
             val dataSource = BoardGameDataSource(this)
-            val imagePath = dataSource.getImageFilesByGameId(gameId)[currentImageIndex]
 
-            // Usuń plik z katalogu
-            val imagesDir = File(getExternalFilesDir(null), "images")
-            val file = File(imagesDir, imagePath)
-            file.delete()
+            val imagePaths = dataSource.getImageFilesByGameId(gameId)
+            var imagePath:String
 
-            // Usuń rekord z bazy danych
-            dataSource.deleteImageFileByImagePath(imagePath)
+            if(currentImageIndex >= imagePaths.size) {
+                imagePath = imagePaths[currentImageIndex-1]
+            } else {
+                imagePath = imagePaths[currentImageIndex]
+            }
 
-            images.removeAt(currentImageIndex)
+                if(images[currentImageIndex].equals(DEFAULT_IMAGE_BITMAP)) {
+                    Toast.makeText(this, "You can't delete default image!", Toast.LENGTH_SHORT).show()
+                } else {
+                    // delete record from database
+                    dataSource.deleteImageFileByImagePath(imagePath)
+                    // delete file from directory
+                    val imagesDir = File(getExternalFilesDir(null), "images")
+                    val file = File(imagesDir, imagePath)
+                    file.delete()
+                    images.removeAt(currentImageIndex)
+                    currentImageIndex-=1
+                }
+
             showImage()
         } else {
-            // Obsłuż sytuację, gdy jest tylko jedno zdjęcie
+            Toast.makeText(this, "You can't delete all images!", Toast.LENGTH_SHORT).show()
         }
     }
     private fun showPreviousImage() {
@@ -173,14 +195,27 @@ class BoardGameDetailsActivity : AppCompatActivity() {
     }
     private fun showNextImage() {
         if (images.isNotEmpty()) {
-            currentImageIndex = (currentImageIndex + 1) % images.size
+            currentImageIndex = (currentImageIndex - 1 + images.size) % images.size
             showImage()
         }
     }
     private fun showImage() {
         val imageView = findViewById<ImageView>(R.id.imageView)
         if (images.isNotEmpty()) {
+
+            if(currentImageIndex == images.size) {
+                currentImageIndex -= 1
+            }
+                if (currentImageIndex == -1)
+                    currentImageIndex = 0
+
+
+            Log.d("CHECK_LIST_Size", images.size.toString())
+
+
             val bitmap = images[currentImageIndex]
+            if(bitmap.equals(DEFAULT_IMAGE_BITMAP))
+                Log.d("CHECK_BITMAP", "Thats it bitmasdppp")
             imageView.setImageBitmap(bitmap)
         } else {
             imageView.setImageDrawable(null)
@@ -193,7 +228,7 @@ class BoardGameDetailsActivity : AppCompatActivity() {
             .setItems(items) { _, which ->
                 when (which) {
                     0 -> {
-                        // Sprawdź uprawnienia do aparatu
+                        // permission for camera
                         if (ContextCompat.checkSelfPermission(
                                 this,
                                 CAMERA
@@ -209,7 +244,7 @@ class BoardGameDetailsActivity : AppCompatActivity() {
                         }
                     }
                     1 -> {
-                        // Sprawdź uprawnienia do galerii
+                        // permission for gallery
                         if (ContextCompat.checkSelfPermission(
                                 this,
                                 READ_MEDIA_IMAGES
@@ -281,6 +316,10 @@ class BoardGameDetailsActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    override fun onBackPressed() {
+        val intent = Intent(this, BoardGameListActivity::class.java)
+        startActivity(intent)
     }
 
 }

@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.inf151313.boardgamecollector.BoardGameListActivity
 import com.inf151313.boardgamecollector.R
 import com.squareup.picasso.Picasso
 import database.BoardGameDataSource
 import enums.Type
 import model.BoardGame
+import java.io.File
+import android.graphics.BitmapFactory
 
 class BoardGameAdapter(private val context: Context, private val boardGames: List<BoardGame>, private val type: Type) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -87,11 +88,23 @@ class BoardGameAdapter(private val context: Context, private val boardGames: Lis
             val dataSource = BoardGameDataSource(context)
             var thumbnailUrl: String = ""
             if(type.equals(Type.BOARDGAME)) {
-                thumbnailUrl = dataSource.getThumbnailByGameId(boardGame.id).toString()
+                val imageFileForThumbnail = dataSource.getImageFilesByGameId(boardGame.id)
+                if(imageFileForThumbnail.isNotEmpty()) {
+                    val file = File(context.getExternalFilesDir(null), "images/${imageFileForThumbnail[0]}")
+                    if (file.exists()) {
+                        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                        imageThumbnail.setImageBitmap(bitmap)
+                    }
+                } else {
+                    thumbnailUrl = dataSource.getThumbnailByGameId(boardGame.id).toString()
+                    Picasso.get().load(thumbnailUrl).into(imageThumbnail)
+                }
             } else {
                 thumbnailUrl = dataSource.getThumbnailByExpansionId(boardGame.id).toString()
+                Picasso.get().load(thumbnailUrl).into(imageThumbnail)
             }
-            Picasso.get().load(thumbnailUrl).into(imageThumbnail)
+
+
 
             itemView.setOnClickListener {
                 val boardGameId = boardGame.id
