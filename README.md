@@ -1,6 +1,6 @@
 # BoardGameCollector
 ## Introduction
-### The project was created for the completion of the Ubiquitous computing course at the 4th semester at the Poznań University of Technology. The project is compeletely writed in Kotlin. App is using boardgamegeek.com boardgames to get and sychronise with own sql database. We can clear all data and start again inputting bgg.com username, synchronise data (when something in your collection has changed), check your expansion or game list and details. You can also add your own images by taking it with camera or from gallery.
+### The project was created for the completion of the Ubiquitous computing course at the 4th semester at the Poznań University of Technology. The project is compeletely writed in Kotlin. App is using boardgamegeek.com boardgames to get and sychronise with own sql database. We can clear all data and start again inputting bgg.com username, synchronise data (when something in your collection has changed), check your expansion or game list and details. You can also add your own images by taking it with camera or adding from gallery.
 
 #### background was taken from: https://wallpaper.mob.org
 ![image](https://github.com/benhus8/BoardGameCollector/assets/89967155/1d0e5073-8770-4bb6-af32-9a3d78ce656a)
