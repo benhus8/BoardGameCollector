@@ -11,7 +11,7 @@ import database.BoardGameDataSource
 import enums.Type
 
 
-class ExpansionListActivity : AppCompatActivity() {
+class ExpansionListActivity : AppCompatActivity(), BoardGameAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var boardGameAdapter: BoardGameAdapter
 
@@ -26,10 +26,17 @@ class ExpansionListActivity : AppCompatActivity() {
         val expansions = dataSource.getAllExpansions()
 
         boardGameAdapter = BoardGameAdapter(this, expansions, Type.EXPANSION)
+        boardGameAdapter.setOnItemClickListener(this)
         recyclerView.adapter = boardGameAdapter
     }
     override fun onBackPressed() {
         val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+    override fun onItemClick(expansionId: Int) {
+        // Otwórz nowe Activity z przekazanym ID obiektu
+        val intent = Intent(this, ExpansionDetailsActivity::class.java)
+        intent.putExtra("expansionId", expansionId)
         startActivity(intent)
     }
 

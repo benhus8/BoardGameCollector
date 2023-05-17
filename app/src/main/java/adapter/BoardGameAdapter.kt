@@ -100,8 +100,17 @@ class BoardGameAdapter(private val context: Context, private val boardGames: Lis
                     Picasso.get().load(thumbnailUrl).into(imageThumbnail)
                 }
             } else {
-                thumbnailUrl = dataSource.getThumbnailByExpansionId(boardGame.id).toString()
-                Picasso.get().load(thumbnailUrl).into(imageThumbnail)
+                val imageFileForThumbnail = dataSource.getImageFilesByExpansionId(boardGame.id)
+                if(imageFileForThumbnail.isNotEmpty()) {
+                    val file = File(context.getExternalFilesDir(null), "images/${imageFileForThumbnail[0]}")
+                    if (file.exists()) {
+                        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                        imageThumbnail.setImageBitmap(bitmap)
+                    }
+                } else {
+                    thumbnailUrl = dataSource.getThumbnailByExpansionId(boardGame.id).toString()
+                    Picasso.get().load(thumbnailUrl).into(imageThumbnail)
+                }
             }
 
 

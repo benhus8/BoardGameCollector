@@ -125,6 +125,20 @@ class BoardGameDataSource(context: Context) {
         return imageFiles
     }
     @SuppressLint("Range")
+    fun getImageFilesByExpansionId(gameId: Int): List<String> {
+        val imageFiles = mutableListOf<String>()
+
+        val query = "SELECT image_path FROM image_file WHERE expansion_id = ?"
+        val cursor = db.rawQuery(query, arrayOf(gameId.toString()))
+
+        while (cursor.moveToNext()) {
+            val imagePath = cursor.getString(cursor.getColumnIndexOrThrow("image_path"))
+            imageFiles.add(imagePath)
+        }
+        cursor.close()
+        return imageFiles
+    }
+    @SuppressLint("Range")
     fun getBoardGameByGameId(gameId: Int): Int? {
         val query = "SELECT bgg_id FROM boardgame WHERE id = ?"
         val selectionArgs = arrayOf(gameId.toString())
@@ -136,6 +150,19 @@ class BoardGameDataSource(context: Context) {
         }
         cursor.close()
         return boardGameBggId
+    }
+    @SuppressLint("Range")
+    fun getExpansionByExpansionId(gameId: Int): Int? {
+        val query = "SELECT bgg_id FROM expansion WHERE id = ?"
+        val selectionArgs = arrayOf(gameId.toString())
+        val cursor = db.rawQuery(query, selectionArgs)
+
+        var expansionBggId: Int? = null
+        if (cursor.moveToFirst()) {
+            expansionBggId = cursor.getInt(cursor.getColumnIndex("bgg_id"))
+        }
+        cursor.close()
+        return expansionBggId
     }
     @SuppressLint("Range")
     fun getThumbnailByExpansionId(gameId: Int): String? {
