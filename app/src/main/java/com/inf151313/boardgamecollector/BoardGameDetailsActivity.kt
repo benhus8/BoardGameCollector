@@ -72,7 +72,7 @@ class BoardGameDetailsActivity : AppCompatActivity() {
                 rank.text = "Global Rank position: " + gameDetails.rank
                 yearProduced.text = "Year Published: " + gameDetails.yearPublished
                 playerNumber.text = "PLayers: " + gameDetails.minPlayers + " - " + gameDetails.maxPlayers
-                playTime.text = "Average playing time: " + gameDetails.playingTime
+                playTime.text = "Average playing time: " + gameDetails.playingTime + " min"
                 textDescription.text = "Description: " + decodeHtmlText(gameDetails.description)
 
                 initUI()
