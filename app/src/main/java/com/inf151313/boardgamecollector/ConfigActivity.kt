@@ -36,7 +36,6 @@ class ConfigActivity : AppCompatActivity() {
                 val editText = findViewById<EditText>(R.id.inputUsername)
                 val text = editText.text.toString()
                 cache.edit().putString("username", text).apply()
-                Log.d("MainActivity", text)
                 cache.edit().putBoolean("configDone", true).apply()
                 val dataSource = BoardGameDataSource(this)
                 dataSource.deleteAllBoardGames()

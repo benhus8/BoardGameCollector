@@ -234,13 +234,8 @@ class ExpansionDetailsActivity : AppCompatActivity() {
                 if (currentImageIndex == -1)
                     currentImageIndex = 0
 
-
-            Log.d("CHECK_LIST_Size", images.size.toString())
-
-
             val bitmap = images[currentImageIndex]
             if(bitmap.equals(DEFAULT_IMAGE_BITMAP))
-                Log.d("CHECK_BITMAP", "Thats it bitmasdppp")
             imageView.setImageBitmap(bitmap)
         } else {
             imageView.setImageDrawable(null)

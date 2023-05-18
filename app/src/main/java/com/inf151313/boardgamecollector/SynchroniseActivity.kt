@@ -113,7 +113,6 @@ class SynchroniseActivity : AppCompatActivity() {
                             imagePath = expansion.image,
                             thumbnail = expansion.thumbnail)
                     )
-                    Log.d("TEST_DATABASE", newExpansionId.toString())
                 }
                 runOnUiThread {
                     val number = Random.nextInt(70, 80)
@@ -130,7 +129,7 @@ class SynchroniseActivity : AppCompatActivity() {
                             originalTitle = boardGame.title,
                             yearPublished = boardGame.yearPublished,
                             bggId = boardGame.bggId))
-                    Log.d("adding to database", boardGame.thumbnail)
+                    Log.d("Add path to database: ", boardGame.thumbnail)
                     dataSource.addImage(
                         Image(
                             expansionId = null,

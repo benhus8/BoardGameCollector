@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d("WE WERE HERE", "TEST_APP")
         val cache = getSharedPreferences("cache", Context.MODE_PRIVATE)
         performRoutineSetup(cache)
     }
