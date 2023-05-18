@@ -21,9 +21,11 @@
 
     <TextView
         android:id="@+id/configJourneyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="117dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="71dp"
         android:fontFamily="@font/medula_one"
         android:gravity="center"
@@ -53,7 +55,7 @@
         android:shadowDx="15"
         android:shadowDy="15"
         android:shadowRadius="15"
-        android:text="Input your username from boardgames.com"
+        android:text="Input your username from boardgamegeek.com"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#000000"
         android:textIsSelectable="false"

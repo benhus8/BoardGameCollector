@@ -97,7 +97,9 @@ class BoardGameAdapter(private val context: Context, private val boardGames: Lis
                     }
                 } else {
                     thumbnailUrl = dataSource.getThumbnailByGameId(boardGame.id).toString()
-                    Picasso.get().load(thumbnailUrl).into(imageThumbnail)
+                    if(!thumbnailUrl.isNullOrEmpty()) {
+                        Picasso.get().load(thumbnailUrl).into(imageThumbnail)
+                    }
                 }
             } else {
                 val imageFileForThumbnail = dataSource.getImageFilesByExpansionId(boardGame.id)
@@ -109,10 +111,13 @@ class BoardGameAdapter(private val context: Context, private val boardGames: Lis
                     }
                 } else {
                     thumbnailUrl = dataSource.getThumbnailByExpansionId(boardGame.id).toString()
-                    Picasso.get().load(thumbnailUrl).into(imageThumbnail)
+                    if(!thumbnailUrl.isNullOrEmpty()) {
+                        Picasso.get().load(thumbnailUrl).into(imageThumbnail)
+                    }
+
+
                 }
             }
-
 
 
             itemView.setOnClickListener {

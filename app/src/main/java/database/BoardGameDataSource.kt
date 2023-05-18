@@ -14,7 +14,9 @@ class BoardGameDataSource(context: Context) {
 
     private val dbHelper: DatabaseHelper = DatabaseHelper(context)
     private val db: SQLiteDatabase = dbHelper.writableDatabase
-
+    fun close() {
+        dbHelper.close()
+    }
     fun addBoardGame(boardGame: BoardGame): Long {
         val values = ContentValues()
         values.put("title", boardGame.title)
@@ -30,6 +32,7 @@ class BoardGameDataSource(context: Context) {
         values.put("year_published", boardGame.yearPublished)
         values.put("bgg_id", boardGame.bggId)
         return  db.insert("expansion", null, values)
+
     }
     fun addImage(image: Image) {
         val values = ContentValues()
@@ -78,7 +81,6 @@ class BoardGameDataSource(context: Context) {
     }
     fun deleteImageFileByImagePath(imagePath: String) {
         db.delete("image_file", "image_path = ?", arrayOf(imagePath.toString()))
-        db.close()
     }
 
     @SuppressLint("Range")
@@ -163,6 +165,7 @@ class BoardGameDataSource(context: Context) {
         }
         cursor.close()
         return expansionBggId
+
     }
     @SuppressLint("Range")
     fun getThumbnailByExpansionId(gameId: Int): String? {
