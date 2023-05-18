@@ -41,14 +41,27 @@ class XmlParserTask : AsyncTask<String, Void, List<BoardGameDTO>>() {
             val itemNode = itemList.item(i)
             if (itemNode.nodeType == org.w3c.dom.Node.ELEMENT_NODE) {
                 val elem = itemNode as org.w3c.dom.Element
+
+                val nameElement = elem.getElementsByTagName("name").item(0)
+                val name = nameElement?.textContent ?: ""
+
+                val yearPublishedElement = elem.getElementsByTagName("yearpublished").item(0)
+                val yearPublished = yearPublishedElement?.textContent?.toIntOrNull() ?: 0
+
+                val imageElement = elem.getElementsByTagName("image").item(0)
+                val image = imageElement?.textContent ?: ""
+
+                val thumbnailElement = elem.getElementsByTagName("thumbnail").item(0)
+                val thumbnail = thumbnailElement?.textContent ?: ""
+
                 val boardGame = BoardGameDTO(
                     elem.getAttribute("objectid").toInt(),
-                elem.getElementsByTagName("name").item(0).textContent,
-                    elem.getElementsByTagName("name").item(0).textContent,
-                elem.getElementsByTagName("yearpublished").item(0)?.textContent?.toInt() ?: 0,
-                    elem.getElementsByTagName("image").item(0).textContent,
-                    elem.getElementsByTagName("thumbnail").item(0).textContent
-                   )
+                    name,
+                    name,
+                    yearPublished,
+                    image,
+                    thumbnail
+                )
                 boardGames.add(boardGame)
             }
         }
