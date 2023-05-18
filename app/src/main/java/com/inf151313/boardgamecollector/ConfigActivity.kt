@@ -91,7 +91,7 @@ class ConfigActivity : AppCompatActivity() {
                             thumbnail = boardGame.thumbnail)
                     )
                 }
-
+                dataSource.close()
                 val currentDate = LocalDate.now()
                 val dateString = currentDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString()
                 cache.edit().putString("syncDate", currentDate.format(
