@@ -46,8 +46,8 @@ class SynchroniseActivity : AppCompatActivity() {
         val lastSyncLong = cache.getLong("syncDateLong", Instant.now().toEpochMilli())
         //we ca synchronise data
         if(
-//            lastSyncLong < Instant.now().minusSeconds(86400).toEpochMilli()
-            true
+            lastSyncLong < Instant.now().minusSeconds(86400).toEpochMilli()
+//            true
         ) {
             Thread(Runnable {
                 syncText.visibility = View.VISIBLE
@@ -89,7 +89,6 @@ class SynchroniseActivity : AppCompatActivity() {
                 dataSource.deleteAllBoardGames()
                 dataSource.deleteAllExpansions()
                 dataSource.deleteAllImages()
-                dataSource.deleteAllImageFiles()
                 runOnUiThread {
                     val number = Random.nextInt(50, 60)
                     progressBar.setProgress(number, true)
