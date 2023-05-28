@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         val cache = getSharedPreferences("cache", Context.MODE_PRIVATE)
         performRoutineSetup(cache)
     }
+    @SuppressLint("SuspiciousIndentation")
     override fun onResume() {
         super.onResume()
         val cache = getSharedPreferences("cache", Context.MODE_PRIVATE)
